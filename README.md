@@ -1,70 +1,29 @@
-# Getting Started with Create React App
+## 1 вопрос
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Добавим в таблицу следующие поля:
+* `ticket_preferential_price` - цена льготных билетов
+* `ticket_preferential_quantity` - количество льготных билетов
+* `ticket_group_price` - цена групповых билетов
+* `ticket_group_quantity` - количество групповых билетов
 
-## Available Scripts
+Итоговый вид таблицы:
+id  | event_id  | event_date          | ticket_adult_price  | ticket_adult_quantity  | ticket_kid_price  | ticket_kid_quantity  | ticket_preferential_price | ticket_preferential_quantity | ticket_group_price | ticket_group_quantity | barcode   | user_id  | equal_price  | created
+--- | --------- | ------------------- | ------------------- | ---------------------- | ----------------- | -------------------- | ------------------------ | --------- | -------- | --------- | --------  | -------- | ------------ | -------------------
+1   | 003       | 2021-08-21 13:00:00 | 700                 | 1                      | 450               | 0                    |         200              |   5     | 500 | 5         | 11111111  | 00451    | 4200          | 2021-01-11 13:22:09
+2   | 006       | 2021-07-29 18:00:00 | 1000                | 0                      | 800               | 2                    |           400            |   2     | 400 | 3         | 22222222  | 00364    | 3600         | 2021-01-12 16:62:08
+3   | 003       | 2021-08-15 17:00:00 | 700                 | 4                      | 450               | 3                    |          200             |   1     | 200 | 0         | 33333333  | 00015    | 4350         | 2021-01-13 10:08:45
 
-In the project directory, you can run:
+## 2 вопрос
 
-### `npm start`
+Добавим в таблицу следующие поля:
+* `barcode_first` - номер баркода у первого билета вместо `barcode`
+* `barcode_last` - номер баркода у последнего билета
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Данное предложение действует, если номера билетов раздаются последовательно. Если у первого билета штрихкод 2222222, то у второго - 2222223, у седьмого - 2222228. После сканирования достаточно просто найти диапазон `barcode_first <= ticket_barcode <= barcode_last` и тогда можно будет восстановить номер заказа.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Итоговый вид таблицы:
+id  | event_id  | event_date          | ticket_adult_price  | ticket_adult_quantity  | ticket_kid_price  | ticket_kid_quantity  | ticket_preferential_price | ticket_preferential_quantity | ticket_group_price | ticket_group_quantity | barcode_first | user_id  | all_sold | equal_price  | created
+--- | --------- | ------------------- | ------------------- | ---------------------- | ----------------- | -------------------- | ------------------------ | --------- | -------- | --------- | --------  | -------- | ----------- | ------------  | -------------------
+1   | 003       | 2021-08-21 13:00:00 |  700                 | 1                      | 450               | 0                    |         200              |   5     | 500 | 5         | 11111111  | 00451 | 11    | 4200          | 2021-01-11 13:22:09
+2   | 006       | 2021-07-29 18:00:00 |  1000                | 0                      | 800               | 2                    |           400            |   2     | 400 | 3         | 22222222  | 00364  |  7    | 3600         | 2021-01-12 16:62:08
+3   | 003       | 2021-08-15 17:00:00 |  700                 | 4                      | 450               | 3                    |          200             |   1     | 200 | 0         | 33333333  | 00015 |  8   | 4350         | 2021-01-13 10:08:45
