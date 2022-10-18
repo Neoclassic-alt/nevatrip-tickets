@@ -21,14 +21,18 @@ function App() {
     if (value === "Не выбрано") {
       setShowAtoB(false)
       setShowBtoA(false)
+      setTimeAtoB(null)
+      setTimeBtoA(null)
     }
     if (value === "из A в B") {
       setShowAtoB(true)
       setShowBtoA(false)
+      setTimeBtoA(null)
     }
     if (value === "из B в A") {
       setShowAtoB(false)
       setShowBtoA(true)
+      setTimeAtoB(null)
     }
     if (value === "из A в B и обратно в А") {
       setShowAtoB(true)
