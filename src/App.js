@@ -18,6 +18,7 @@ function App() {
 
   function onChange(event) {
     const value = event.target.value;
+    setPrice(0)
     if (value === "Не выбрано") {
       setShowAtoB(false)
       setShowBtoA(false)
